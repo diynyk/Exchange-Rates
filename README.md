@@ -9,3 +9,4 @@
  
  https://bank.gov.ua/ua/open-data/api-dev
  
+ url https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json&date=20210223
