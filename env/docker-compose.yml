@@ -1,0 +1,13 @@
+version: "3.3"
+services: 
+  ololo:
+    build: 
+      context: php
+      dockerfile: "dockerfile"
+    image: yulii/php-web:7.2
+    container_name: php
+    volumes: 
+      - ./../www:/var/www/html
+    ports: 
+      - 8080:80 
+
