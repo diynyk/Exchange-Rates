@@ -30,17 +30,17 @@ class SetRateCommand extends Command {
     return $this->rates;
   }
   
-  private  function getCurency($code, $factor) {
-    return ($this->getCurrencies()[$code])*$factor;
+  private  function getCurency($code) {
+    return ($this->getCurrencies()[$code]);
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
   {
     $sCurrency = $input->getArgument('sCurrency');
     $tCurrency = $input->getArgument('tCurrency');
-    $factor = 1 + (((int) $input->getArgument('factor')) / 100);
+    $factor = 1 + (2 * (((int) $input->getArgument('factor')) / 100));
 
-    $rate = $this->getCurency($sCurrency, $factor) / $this->getCurency($tCurrency, $factor);
+    $rate = ($this->getCurency($sCurrency) / $this->getCurency($tCurrency)) *$factor;
     
     die($rate);
    return 0;
