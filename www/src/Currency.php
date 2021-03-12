@@ -10,7 +10,6 @@ class Currency extends EntityAbstract {
   private $userId;
   private $token;
 
-
   public function setEndpoint($endpoint) {
     $this->endpoint = $endpoint;
     return $this;
@@ -20,7 +19,6 @@ class Currency extends EntityAbstract {
     $this->userId = $userId;
     return $this;
   }
-
 
   public function setToken($token) {
     $this->token = $token;
@@ -52,16 +50,6 @@ class Currency extends EntityAbstract {
 
 
       }
-
-
-
-
-
-
-
-
-
-
 
 
 }

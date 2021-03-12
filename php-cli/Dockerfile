@@ -1,3 +1,6 @@
+ARG PHP_VER="7.2"
+FROM php:${PHP_VER}-cli-buster
+
 FROM php:7.2-cli-buster
 
 WORKDIR /app
