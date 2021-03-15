@@ -5,22 +5,22 @@ This project is used to send the current exchange rate multiplied by the require
 
 ##How to use it
 ####All commands should start with :
-./fixer 
+`./fixer` 
 
 ####To call for help :
-./fixer help
+`./fixer help`
 
 ####To access help for all available commands:
-./fixer list
+`./fixer list`
 
  ####Exchange rate command:
-./fixer set:rates https://manezh.bitrix.uno/rest 1 l7c37x1gcju8t1cq currency factor
+`./fixer set:rates rest-endpoint, user-id, user-token, currency, factor`
  
 *currency - required currency (USA, EUR)
 *factor - official rate percentage factor
 
 ###Example :
-./fixer set:rates https://manezh.bitrix.uno/rest 1 l7c37x1gcju8t1cq EUR 5
+`./fixer set:rates rest-endpoint user-id user-token EUR 5`
 
 
 
