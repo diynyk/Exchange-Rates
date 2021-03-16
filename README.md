@@ -1,4 +1,4 @@
-# EXCHANGE-RATES
+# EXCHANGE-RATES [![Build Status](https://travis-ci.com/diynyk/Exchange-Rates.svg?branch=master)](https://travis-ci.com/diynyk/Exchange-Rates)
 
 ## What is EXCHANGE-RATES?
 This project is used to send the current exchange rate multiplied by the required percentage in Bitrix.
