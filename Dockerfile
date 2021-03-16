@@ -1,14 +1,14 @@
 ARG PHP_VER="7.2"
-FROM php:${PHP_VER}-cli-buster
+FROM dezar/php-cli:${PHP_VER}
 
-FROM php:7.2-cli-buster
+COPY . /app
+
+RUN ./composer update && \
+    rm ./composer
+
+FROM php:${PHP_VER}-alpine
 
 WORKDIR /app
+COPY --from=builder /app /app
 
-RUN apt-get update && \
-    apt-get install -y \
-        zip \
-        curl \
-        git && \
-    curl -L getcomposer.org/installer | php -- --filename=composer && \
-    chmod +x ./composer
+ENTRYPOINT [ "/app/fixer" ]
