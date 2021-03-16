@@ -8,7 +8,7 @@ This project is used to send the current exchange rate multiplied by the require
 `./fixer` 
 
 #### To call for help :
-`./fixer help`
+`docker run --rm dezar/exchange-rates:7.2 help`
 
 #### To access help for all available commands:
 `./fixer list`
