@@ -102,6 +102,13 @@ services:
       - "@logger"
       - "@helper.http.client"
 
+  helper.currency:
+    class: Fixer\Currency
+    arguments:
+      - "currency"
+      - "@logger"
+      - "@helper.http.client"    
+
 
 
   command.contact.fix:
@@ -158,11 +165,14 @@ services:
     arguments:
       - "@logger"
       - "@nbu.reader"
+      - "@helper.currency"
     calls:
       - [ setName, [ "set:rates" ] ]
       - [ setDescription, [ "test" ] ]
-      - [ addArgument, [ "sCurrency", "%arg.REQUIRED%", "Source Currency, e.g.: EUR" ]]
-      - [ addArgument, [ "tCurrency", "%arg.REQUIRED%", "Target Currency, e.g.: USD" ]]
+      - [ addArgument, [ "rest-endpoint", "%arg.REQUIRED%", "REST endpoint, e.g.: 'https://crm-dp.bitrix24.ua/rest'" ] ]
+      - [ addArgument, [ "user-id", "%arg.REQUIRED%", "REST user ID, e.g.: 1" ] ]
+      - [ addArgument, [ "user-token", "%arg.REQUIRED%", "REST user token, e.g.: 'sadfasdfsadf'" ] ]
+      - [ addArgument, [ "currency", "%arg.REQUIRED%", "Source Currency, e.g.: EUR" ]]
       - [ addArgument, [ "factor", "%arg.REQUIRED%", "Currency rate factor, %, e.g.: 5" ]]
 
   cli-app:
