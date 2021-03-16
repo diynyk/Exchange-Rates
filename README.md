@@ -4,23 +4,28 @@
 This project is used to send the current exchange rate multiplied by the required percentage in Bitrix.
 
 ## How to use it
+**PHP_VER**:
+* 7.2
+* 7.3
+* 7.4
+* 8.0
 #### All commands should start with :
-`./fixer` 
+`docker run --rm dezar/exchange-rates:PHP_VER ` 
 
 #### To call for help :
-`docker run --rm dezar/exchange-rates:7.2 help`
+`docker run --rm dezar/exchange-rates:PHP_VER help`
 
 #### To access help for all available commands:
-`./fixer list`
+`docker run --rm dezar/exchange-rates:PHP_VER  list`
 
 #### Exchange rate command:
-`./fixer set:rates rest-endpoint, user-id, user-token, currency, factor`
+`docker run --rm dezar/exchange-rates:PHP_VER  set:rates rest-endpoint, user-id, user-token, currency, factor`
  
 * currency - required currency (USA, EUR)
 * factor - official rate percentage factor
 
 ### Example :
-`./fixer set:rates rest-endpoint user-id user-token EUR 5`
+`docker run --rm dezar/exchange-rates:PHP_VER  set:rates rest-endpoint user-id user-token EUR 5`
 
 
 

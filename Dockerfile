@@ -1,5 +1,5 @@
 ARG PHP_VER="7.2"
-FROM dezar/php-cli:${PHP_VER}
+FROM dezar/php-cli:${PHP_VER} as builder
 
 COPY . /app
 
