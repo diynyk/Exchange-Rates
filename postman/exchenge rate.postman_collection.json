@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "2a0acf3f-f16f-4fca-a891-f4e8a5d58c32",
+		"name": "exchenge rate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "change EURO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manezh.bitrix.uno/rest/1/l7c37x1gcju8t1cq/crm.currency.update.json?id=EUR&fields[AMOUNT]=33.6000",
+					"protocol": "https",
+					"host": [
+						"manezh",
+						"bitrix",
+						"uno"
+					],
+					"path": [
+						"rest",
+						"1",
+						"l7c37x1gcju8t1cq",
+						"crm.currency.update.json"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "EUR"
+						},
+						{
+							"key": "fields[AMOUNT]",
+							"value": "33.6000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change USD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manezh.bitrix.uno/rest/1/l7c37x1gcju8t1cq/crm.currency.update.json?id=USD&fields[AMOUNT]=27.6000",
+					"protocol": "https",
+					"host": [
+						"manezh",
+						"bitrix",
+						"uno"
+					],
+					"path": [
+						"rest",
+						"1",
+						"l7c37x1gcju8t1cq",
+						"crm.currency.update.json"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "USD"
+						},
+						{
+							"key": "fields[AMOUNT]",
+							"value": "27.6000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
