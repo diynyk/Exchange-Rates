@@ -6,7 +6,7 @@ use \GuzzleHttp\Client;
 
 class EntityFixer extends EntityAbstract {
 
-  private $phones=[];
+  public $phones=[];
 
   private function getContact($endpoint, $userId, $token, $id) {
     $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.get.json?ID=%s';
