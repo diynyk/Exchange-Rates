@@ -10,10 +10,10 @@ class EntityFixerTest extends TestCase
     public function testFixPhones($in, $out)
     {
         $mockObj = 
-            $this->getMockBuilder('Fixer\EntityFixer')
+            $this->getMockBuilder(\Fixer\EntityFixer::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockObj->phones = [$in];
+        $mockObj->setPhones([$in]);
 
         $reflectionClass = new ReflectionClass($mockObj);
 
@@ -23,7 +23,7 @@ class EntityFixerTest extends TestCase
         $method->invoke($mockObj);
 
 
-        $result = $mockObj->phones;
+        $result = $mockObj->getPhones();
 
 
         $this->assertSame(reset($result), $out);

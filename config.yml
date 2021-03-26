@@ -11,6 +11,9 @@ parameters:
   arg.OPTIONAL: 2
   arg.IS_ARRAY: 4
 
+  sev.DEBUG: 100
+  sev.INFO: 200
+
   request.sleep.interval.us: 100000
 
 services:
@@ -46,6 +49,7 @@ services:
       Monolog\Handler\StreamHandler
     arguments:
       - '%logger.stream%'
+      - '%sev.DEBUG%'
     calls:
       - [ setFormatter, [ '@logger.formatter' ] ]
 
@@ -154,9 +158,8 @@ services:
       - [ addArgument, [ "user-token", "%arg.REQUIRED%", "REST user token, e.g.: 'sadfasdfsadf'" ] ]
 
   nbu.reader:
-    class: Fixer\ZaprosNBU
+    class: Diynyk\Nbu\Client
     arguments:
-      - ""
       - "@logger"
       - "@helper.http.client"
 

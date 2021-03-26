@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e1b7e076b06752c3e35e87d76e3a7b9",
+    "content-hash": "aac1503371e9b31f0984492ee4eea488",
     "packages": [
+        {
+            "name": "diynyk/nbu-sdk",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/diynyk/lib-php-nbu-sdk.git",
+                "reference": "4a73127ca96f1e17893c014f1823033fe33a315e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/diynyk/lib-php-nbu-sdk/zipball/4a73127ca96f1e17893c014f1823033fe33a315e",
+                "reference": "4a73127ca96f1e17893c014f1823033fe33a315e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~7",
+                "monolog/monolog": "~2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "9.5.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Diynyk\\Nbu\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/diynyk/lib-php-nbu-sdk/issues",
+                "source": "https://github.com/diynyk/lib-php-nbu-sdk/tree/main"
+            },
+            "time": "2021-03-25T18:13:32+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "dev-master",
@@ -3334,10 +3372,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "diynyk/nbu-sdk": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
