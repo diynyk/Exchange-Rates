@@ -1,6 +1,9 @@
 <?php
 
+use Fixer\EntityFixer;
+use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 
 class EntityFixerTest extends TestCase
 {
@@ -9,22 +12,18 @@ class EntityFixerTest extends TestCase
      */
     public function testFixPhones($in, $out)
     {
-        $mockObj = 
-            $this->getMockBuilder(\Fixer\EntityFixer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockObj->setPhones([$in]);
+        $fixer = new EntityFixer('', new NullLogger(), new Client());
 
-        $reflectionClass = new ReflectionClass($mockObj);
+        $fixer->setPhones([$in]);
+
+        $reflectionClass = new ReflectionClass($fixer);
 
         $method = $reflectionClass->getMethod('fixPhones');
         $method->setAccessible(true);
 
-        $method->invoke($mockObj);
+        $method->invoke($fixer);
 
-
-        $result = $mockObj->getPhones();
-
+        $result = $fixer->getPhones();
 
         $this->assertSame(reset($result), $out);
     }
@@ -32,23 +31,23 @@ class EntityFixerTest extends TestCase
     public function fixPhonesDataProvider()
     {
         return [
-            [
+            'Long number' => [
                 '+380672222222',
                 '0672222222'
             ],
-            [
+            'dummy test' => [
                 '+380',
                 '0'
             ],
-            [
+            'dummy false test' => [
                 '38',
                 '38'
             ],
-            [
+            'Almost full number' => [
                 '380672222222',
                 '0672222222'
             ],
-            [
+            'Old style number' => [
                 '80672222222',
                 '0672222222'
             ]

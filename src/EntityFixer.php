@@ -2,11 +2,10 @@
 
 namespace Fixer;
 
-use \GuzzleHttp\Client;
+class EntityFixer extends EntityAbstract
+{
 
-class EntityFixer extends EntityAbstract {
-
-  protected $phones=[];
+    protected $phones = [];
 
     /**
      * @return array
@@ -24,79 +23,85 @@ class EntityFixer extends EntityAbstract {
         $this->phones = $phones;
     }
 
-  private function getContact($endpoint, $userId, $token, $id) {
-    $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.get.json?ID=%s';
-    $response = $this->client->request(
-      'GET',
-      vsprintf(
-        $ENDPOINT_TEMPLATE,
-        [
-          $endpoint,
-          $userId,
-          $token,
-          $this->entity,
-          $id
-        ]
-      )
-    );
+    private function getContact($endpoint, $userId, $token, $id)
+    {
+        $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.get.json?ID=%s';
+        $response = $this->client->request(
+            'GET',
+            vsprintf(
+                $ENDPOINT_TEMPLATE,
+                [
+                    $endpoint,
+                    $userId,
+                    $token,
+                    $this->entity,
+                    $id
+                ]
+            )
+        );
 
-    if ($response->getStatusCode() >= 400 ) {
-      die('error');
-    }
-    
-    $data = json_decode($response->getBody(), true);
-    $contact = $data['result'];
-    $phones = $contact['PHONE'];
-    foreach($phones as $phStruct) {
-      $this->phones[(int)$phStruct['ID']]=$phStruct['VALUE'];
-    }
-  }
+        if ($response->getStatusCode() >= 400) {
+            die('error');
+        }
 
-  private function fixPhones() {
-    foreach($this->phones as & $phone) {
-      $phone = preg_replace('/^(\+380|380|80)/ius', '0', $phone);
-    }
-  }
-
-  private function setContact($endpoint, $userId, $token, $id){
-    $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.update.json?id=%s';
-
-    $phones = [];
-
-    foreach ($this->phones as $phoneId => $phoneValue) {
-      $phones[] = [ 'ID' => $phoneId, 'VALUE' => $phoneValue ];
+        $data = json_decode($response->getBody(), true);
+        $contact = $data['result'];
+        $phones = $contact['PHONE'];
+        foreach ($phones as $phStruct) {
+            $this->phones[(int)$phStruct['ID']] = $phStruct['VALUE'];
+        }
     }
 
-    $payload = [
-      'ID' => $id,
-      'fields' => [
-        'PHONE' => $phones
-      ]
-    ];
+    private function fixPhones()
+    {
+        foreach ($this->phones as & $phone) {
+            $phone = preg_replace('/^(\+380|380|80)/ius', '0', $phone);
+        }
+    }
 
-    $response = $this->client->request(
-      'POST',
-      vsprintf(
-        $ENDPOINT_TEMPLATE,
-        [
-          $endpoint,
-          $userId,
-          $token,
-          $this->entity,
-          $id
-        ]
-      ), ['json' => $payload]);
-  }
+    private function setContact($endpoint, $userId, $token, $id)
+    {
+        $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.update.json?id=%s';
 
-  public function fix($endpoint, $userId, $token, $id){
-    $this->log->debug('Getting contact ' . $id);
-    $this->getContact($endpoint, $userId, $token, $id);
-    $this->log->debug('Got phones: ' . var_export($this->phones, true) . ' for contact '. $id);
-    $this->fixPhones();
-    $this->log->debug('Fixed phones: ' . var_export($this->phones, true) . ' for contact '. $id);
-    $this->setContact($endpoint, $userId, $token, $id);
-    $this->phones = [];
-    return $this->phones;
-  }
+        $phones = [];
+
+        foreach ($this->phones as $phoneId => $phoneValue) {
+            $phones[] = ['ID' => $phoneId, 'VALUE' => $phoneValue];
+        }
+
+        $payload = [
+            'ID' => $id,
+            'fields' => [
+                'PHONE' => $phones
+            ]
+        ];
+
+        $response = $this->client->request(
+            'POST',
+            vsprintf(
+                $ENDPOINT_TEMPLATE,
+                [
+                    $endpoint,
+                    $userId,
+                    $token,
+                    $this->entity,
+                    $id
+                ]
+            ),
+            ['json' => $payload]
+        );
+    }
+
+    public function fix($endpoint, $userId, $token, $id)
+    {
+        $this->log->debug('Getting contact ' . $id);
+        $this->getContact($endpoint, $userId, $token, $id);
+        $this->log->debug('Got phones: ' . var_export($this->phones, true) . ' for contact ' . $id);
+        $this->fixPhones();
+        $this->log->debug('Fixed phones: ' . var_export($this->phones, true) . ' for contact ' . $id);
+        $this->setContact($endpoint, $userId, $token, $id);
+        $this->phones = [];
+        return $this->phones;
+    }
 }
 
