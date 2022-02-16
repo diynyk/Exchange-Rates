@@ -1,0 +1,13 @@
+language: bash
+services: docker
+env:
+  - PHP_VER=7.4
+  - PHP_VER=8.0
+script:
+  - ./php_web.sh ${PHP_VER}
+notifications:
+  email:
+    recipients:
+      - rynikov12@gmail.com
+    on_success: change
+    on_failure: always  

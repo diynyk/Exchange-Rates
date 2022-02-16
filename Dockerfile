@@ -1,11 +1,12 @@
-FROM dezar/php-cli:latest as builder
+ARG PHP_VER="7.2"
+FROM dezar/php-cli:${PHP_VER} as builder
 
 COPY . /app
 
 RUN ./composer update && \
     rm ./composer
 
-FROM php:7.2-alpine
+FROM php:${PHP_VER}-alpine
 
 WORKDIR /app
 COPY --from=builder /app /app
